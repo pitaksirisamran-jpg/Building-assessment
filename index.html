@@ -1,0 +1,3190 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DCM Building Assessment</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #1a56db;
+  --primary-dark: #1341b0;
+  --primary-light: #ebf0ff;
+  --accent: #0ea5e9;
+  --success: #16a34a;
+  --warning: #d97706;
+  --danger: #dc2626;
+  --bg: #f0f4f8;
+  --surface: #ffffff;
+  --border: #d1d9e0;
+  --text: #1e2a3b;
+  --text-muted: #6b7a90;
+  --shadow: 0 2px 12px rgba(26,86,219,0.08);
+  --shadow-lg: 0 8px 32px rgba(26,86,219,0.13);
+  --radius: 10px;
+  --radius-lg: 16px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Sarabun', 'IBM Plex Sans Thai', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* LOGIN PAGE STYLE */
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  background: radial-gradient(circle at top left, #1e293b 0%, #0f172a 100%);
+}
+
+.login-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 440px;
+  padding: 40px 32px;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.login-logo {
+  background: var(--primary);
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: white;
+  margin: 0 auto 16px;
+}
+
+.login-header h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.login-header p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.app-header {
+  background: #1a2540;
+  color: #fff;
+  padding: 0 28px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+
+.header-logo {
+  font-size: 1.05rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-logo .logo-icon {
+  background: var(--primary);
+  border-radius: 7px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-info-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+}
+
+.role-badge {
+  background: var(--accent);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.72rem;
+}
+
+.hnav-btn {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: #fff;
+  padding: 7px 16px;
+  border-radius: 7px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.hnav-btn:hover {
+  background: rgba(255,255,255,0.25);
+  color: #fff;
+}
+
+.hnav-btn.logout {
+  background: var(--danger);
+}
+.hnav-btn.logout:hover {
+  background: #b91c1c;
+}
+
+.page {
+  display: none;
+} 
+
+.page.active {
+  display: block;
+}
+
+/* HOME */
+.home-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 20px 60px;
+}
+
+.home-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.home-topbar h1 {
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stat-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.stat-icon.blue { background: #ebf0ff; } 
+.stat-icon.green { background: #dcfce7; } 
+.stat-icon.red { background: #fee2e2; } 
+.stat-icon.yellow { background: #fef3c7; } 
+.stat-icon.teal { background: #e0f7f4; }
+
+.stat-val {
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+} 
+
+.stat-label {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+}
+
+.search-wrap input {
+  width: 100%;
+  padding: 9px 14px 9px 36px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.92rem;
+  font-family: inherit;
+  outline: none;
+  background: #fff;
+  transition: border 0.15s;
+}
+
+.search-wrap input:focus {
+  border-color: var(--primary);
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+}
+
+.filter-select {
+  padding: 9px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.88rem;
+  font-family: inherit;
+  background: #fff;
+  color: var(--text);
+  outline: none;
+  cursor: pointer;
+}
+
+.table-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.proj-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.proj-table th {
+  background: #f8fafc;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1.5px solid var(--border);
+  white-space: nowrap;
+}
+
+.proj-table td {
+  padding: 13px 16px;
+  border-bottom: 1px solid #f0f4f8;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.proj-table tr:last-child td {
+  border-bottom: none;
+}
+
+.proj-table tbody tr:hover {
+  background: #f8faff;
+}
+
+.building-name {
+  font-weight: 700;
+} 
+
+.building-loc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 11px;
+  border-radius: 99px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.status-badge.draft { background: #f0f4f8; color: var(--text-muted); } 
+.status-badge.in-progress { background: #fef3c7; color: var(--warning); }
+.status-badge.done-pass { background: #dcfce7; color: var(--success); } 
+.status-badge.done-fail { background: #fee2e2; color: var(--danger); }
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.action-btns {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+
+.abt {
+  width: 32px;
+  height: 32px;
+  border-radius: 7px;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.13s;
+}
+
+.abt:hover {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.abt.del:hover {
+  border-color: var(--danger);
+  background: #fee2e2;
+}
+
+.empty-state {
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+  opacity: 0.35;
+} 
+
+.empty-label {
+  font-size: 1rem;
+  font-weight: 600;
+} 
+
+.empty-sub {
+  font-size: 0.85rem;
+  margin-top: 6px;
+}
+
+/* ASSESSMENT */
+.stepper-bar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 18px 0;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  cursor: pointer;
+}
+
+.step-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: 2px solid var(--border);
+  background: #fff;
+  color: var(--text-muted);
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.step-item.active .step-circle {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  box-shadow: 0 0 0 4px var(--primary-light);
+}
+
+.step-item.done .step-circle {
+  background: var(--success);
+  border-color: var(--success);
+  color: #fff;
+}
+
+.step-label {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.step-item.active .step-label {
+  color: var(--primary);
+  font-weight: 700;
+} 
+
+.step-item.done .step-label {
+  color: var(--success);
+}
+
+.step-divider {
+  flex: 1;
+  height: 2px;
+  background: var(--border);
+  margin: 0 8px;
+} 
+
+.step-divider.done {
+  background: var(--success);
+}
+
+.back-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px 0;
+  width: fit-content;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.assess-main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 28px 20px 60px;
+}
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 28px 32px;
+  margin-bottom: 20px;
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.12rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.card-title .icon-box {
+  width: 36px;
+  height: 36px;
+  background: var(--primary);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 20px;
+}
+
+.form-grid .span2 {
+  grid-column: span 2;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.form-group label span.req {
+  color: var(--danger);
+}
+
+.form-group input, .form-group select {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--text);
+  background: #fff;
+  transition: border 0.15s, box-shadow 0.15s;
+  outline: none;
+}
+
+.form-group input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.form-group input::placeholder {
+  color: #b0bbc9;
+}
+
+.evaluator-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.evaluator-row input {
+  flex: 1;
+}
+
+.btn-remove {
+  background: none;
+  border: none;
+  color: var(--danger);
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.btn-remove:hover {
+  background: #fee2e2;
+}
+
+.btn-add {
+  color: var(--primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 0;
+  margin-top: 8px;
+}
+
+.btn-add:hover {
+  text-decoration: underline;
+}
+
+.assess-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.assess-table th {
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.84rem;
+  font-weight: 600;
+  padding: 11px 10px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.assess-table th:first-child {
+  text-align: left;
+}
+
+.step2-scroll-wrap {
+  overflow-y: auto;
+  max-height: calc(100vh - 220px);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+
+.assess-table td {
+  padding: 9px 10px;
+  border-bottom: 1px solid #eef1f6;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.cat-row td {
+  background: #f0f4ff;
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 0.91rem;
+}
+
+.cat-row td:first-child {
+  padding-left: 14px;
+}
+
+.sub-row td {
+  background: #fff;
+} 
+
+.sub-row td:first-child {
+  padding-left: 24px;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+.score-display {
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 1rem;
+  text-align: center;
+}
+
+.rating-btns {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+
+.rbtn {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.13s;
+  color: var(--text-muted);
+}
+
+.rbtn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--primary-light);
+}
+
+.rbtn.sel1 { background: #fee2e2; border-color: var(--danger); color: var(--danger); }
+.rbtn.sel2 { background: #fef3c7; border-color: var(--warning); color: var(--warning); }
+.rbtn.sel3 { background: #dcfce7; border-color: var(--success); color: var(--success); }
+
+.grand-total-row td {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 13px 10px;
+}
+
+.upload-btns {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+
+.ubtn {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  transition: all 0.13s;
+}
+
+.ubtn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: #e0f2fe;
+}
+
+.radio-group {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.radio-group input[type=radio] {
+  accent-color: var(--primary);
+  width: 16px;
+  height: 16px;
+}
+
+.summary-score-box {
+  border-radius: var(--radius-lg);
+  padding: 22px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.summary-score-box.pass {
+  background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+  border: 2px solid var(--success);
+}
+
+.summary-score-box.fail {
+  background: linear-gradient(135deg, #fee2e2, #fecaca);
+  border: 2px solid var(--danger);
+}
+
+.score-big {
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+.score-big.pass { color: var(--success); } 
+.score-big.fail { color: var(--danger); }
+
+.verdict {
+  font-size: 1.15rem;
+  font-weight: 700;
+} 
+
+.verdict.pass { color: var(--success); } 
+.verdict.fail { color: var(--danger); }
+
+.criteria-note {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.breakdown-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.breakdown-table th {
+  background: #f0f4ff;
+  color: var(--primary);
+  font-size: 0.85rem;
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 2px solid var(--primary-light);
+}
+
+.breakdown-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #eef1f6;
+  font-size: 0.9rem;
+}
+
+.breakdown-table .score-cell {
+  font-weight: 700;
+  color: var(--primary);
+  text-align: center;
+}
+
+.breakdown-table .max-cell {
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.score-bar-wrap {
+  background: #e2e8f0;
+  border-radius: 99px;
+  height: 8px;
+  overflow: hidden;
+}
+
+.score-bar {
+  height: 8px;
+  border-radius: 99px;
+  background: var(--primary);
+  transition: width 0.5s;
+}
+
+.btn {
+  padding: 11px 26px;
+  border-radius: 9px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary { background: var(--primary); color: #fff; } 
+.btn-primary:hover { background: var(--primary-dark); box-shadow: 0 4px 12px rgba(26,86,219,0.25); }
+.btn-outline { background: #fff; color: var(--primary); border: 2px solid var(--primary); } 
+.btn-outline:hover { background: var(--primary-light); }
+.btn-ghost { background: #f0f4f8; color: var(--text-muted); border: 1.5px solid var(--border); } 
+.btn-ghost:hover { background: #e2e8f0; }
+.btn-success { background: var(--success); color: #fff; } 
+.btn-success:hover { background: #15803d; }
+.btn-danger { background: var(--danger); color: #fff; } 
+.btn-danger:hover { background: #b91c1c; }
+
+.actions-bar {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.actions-bar.spread {
+  justify-content: space-between;
+}
+
+.section-divider {
+  border: none;
+  border-top: 1.5px solid var(--border);
+  margin: 20px 0;
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 99px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.badge-pass { background: #dcfce7; color: var(--success); } 
+.badge-fail { background: #fee2e2; color: var(--danger); }
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 28px 32px;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: var(--shadow-lg);
+  transform: scale(0.96);
+  transition: transform 0.2s;
+}
+
+.modal-overlay.open .modal {
+  transform: scale(1);
+}
+
+.modal-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.modal-body {
+  font-size: 0.93rem;
+  color: var(--text-muted);
+  margin-bottom: 22px;
+  line-height: 1.6;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.toast {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  background: var(--text);
+  color: #fff;
+  padding: 13px 22px;
+  border-radius: 10px;
+  font-size: 0.93rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: all 0.25s;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+} 
+
+.toast.success { background: var(--success); } 
+.toast.info { background: var(--primary); }
+
+.hidden {
+  display: none !important;
+}
+
+@media(max-width:900px) {
+  .stats-row { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media(max-width:700px) {
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-grid .span2 { grid-column: span 1; }
+  .card { padding: 18px 14px; }
+  .assess-main, .home-main { padding: 16px 8px 60px; }
+  .report-info-grid { grid-template-columns: 1fr; }
+  .report-info-cell:nth-child(odd) { border-right: none; }
+  .att-file-list { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
+}
+
+.att-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.att-modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.att-modal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 0;
+  max-width: 560px;
+  width: 94%;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.22);
+  transform: scale(0.96);
+  transition: transform 0.2s;
+  overflow: hidden;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.att-modal-overlay.open .att-modal {
+  transform: scale(1);
+}
+
+.att-modal-header {
+  background: var(--primary);
+  color: #fff;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.att-modal-header h3 {
+  font-size: 0.98rem;
+  font-weight: 700;
+}
+
+.att-close {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.att-close:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+.att-modal-body {
+  padding: 16px 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.att-section-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 12px 0 8px;
+}
+
+.att-file-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+.att-file-item {
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.13s;
+  position: relative;
+}
+
+.att-file-item:hover {
+  border-color: var(--primary);
+  box-shadow: 0 2px 8px rgba(26, 86, 219, 0.15);
+}
+
+.att-file-thumb {
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+  display: block;
+}
+
+.att-file-icon {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  background: #f8fafc;
+}
+
+.att-file-name {
+  padding: 6px 8px;
+  font-size: 0.75rem;
+  color: var(--text);
+  text-align: center;
+  word-break: break-all;
+  border-top: 1px solid var(--border);
+  background: #fff;
+}
+
+.att-file-del {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 20px;
+  height: 20px;
+  background: rgba(220, 38, 38, 0.85);
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.att-link-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.att-link-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 8px 12px;
+  border: 1.5px solid var(--border);
+}
+
+.att-link-row a {
+  flex: 1;
+  color: var(--primary);
+  font-size: 0.88rem;
+  word-break: break-all;
+  text-decoration: none;
+}
+
+.att-link-row a:hover {
+  text-decoration: underline;
+}
+
+.att-link-del {
+  background: none;
+  border: none;
+  color: var(--danger);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0 4px;
+  flex-shrink: 0;
+}
+
+.att-modal-footer {
+  padding: 12px 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* LINK INPUT MODAL */
+.link-modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: 22px 24px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  transform: scale(0.96);
+  transition: transform 0.2s;
+}
+
+.att-modal-overlay.open .link-modal {
+  transform: scale(1);
+}
+
+.link-modal h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: var(--text);
+}
+
+.link-modal input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.93rem;
+  font-family: inherit;
+  outline: none;
+}
+
+.link-modal input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.link-modal .modal-actions {
+  margin-top: 14px;
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+/* REPORT HEADER */
+.report-header-box {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.report-header-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px 14px;
+}
+
+.report-logo-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.report-logo-icon svg {
+  width: 48px;
+  height: 48px;
+}
+
+.report-org-name {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #1a2540;
+  line-height: 1.2;
+}
+
+.report-org-sub {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+.report-divider {
+  height: 5px;
+  background: linear-gradient(90deg, #1a56db 70%, #f5c518 100%);
+}
+
+.report-title-bar {
+  background: #1a2540;
+  color: #fff;
+  text-align: center;
+  padding: 11px;
+  font-size: 0.97rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+/* REPORT PROJECT INFO TABLE */
+.report-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 0;
+}
+
+.report-info-cell {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.report-info-cell:nth-last-child(-n+2) {
+  border-bottom: none;
+}
+
+.report-info-cell:nth-child(odd) {
+  border-right: 1px solid var(--border);
+  background: #f8fafc;
+}
+
+.report-info-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 3px;
+}
+
+.report-info-value {
+  font-size: 0.93rem;
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ADMIN PANEL STYLING */
+.admin-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 28px 32px;
+  margin-bottom: 24px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+
+.admin-table th {
+  background: #f8fafc;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1.5px solid var(--border);
+}
+
+.admin-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f4f8;
+  font-size: 0.9rem;
+}
+
+.admin-form-row {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 1fr;
+  gap: 12px;
+  background: #f8fafc;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px dashed var(--border);
+  margin-bottom: 16px;
+  align-items: flex-end;
+}
+
+@media print {
+  .app-header, .stepper-bar, .actions-bar, .back-link, .no-print, .modal-overlay, .att-modal-overlay {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+  .card, .report-header-box {
+    box-shadow: none;
+    border: 1px solid #d1d9e0;
+  }
+  .assess-main {
+    padding: 0;
+  }
+  .report-header-box {
+    border: none;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN VIEW (Shown when not logged in) -->
+<div class="login-container" id="login-view">
+  <div class="login-card">
+    <div class="login-header">
+      <div class="login-logo">🏛️</div>
+      <h2>DCM Building Assessment</h2>
+      <p>ลงชื่อเข้าใช้งานเพื่อเริ่มทำแบบประเมิน</p>
+    </div>
+    
+    <div style="margin-bottom: 20px;">
+      <div class="form-group" style="margin-bottom: 16px;">
+        <label>ชื่อผู้ใช้งาน (อีเมล)</label>
+        <input type="email" id="login-email" placeholder="example@egat.co.th" style="width: 100%;">
+      </div>
+      <div class="form-group" style="margin-bottom: 24px;">
+        <label>รหัสผ่าน</label>
+        <input type="password" id="login-password" placeholder="••••••••" style="width: 100%;">
+      </div>
+      <button class="btn btn-primary" onclick="handleLogin()" style="width: 100%; justify-content: center; padding: 12px;">🔑 ลงชื่อเข้าใช้งาน</button>
+    </div>
+    
+    <div style="border-top: 1px solid #e2e8f0; padding-top: 16px; font-size: 0.78rem; color: var(--text-muted); line-height: 1.6;">
+      <strong>💡 ข้อมูลบัญชีแนะนำสำหรับการทดสอบสิทธิ์ (กลุ่ม 1-4):</strong><br>
+      • กลุ่ม 1 (ทั่วไป): 593047@egat.co.th | รหัสผ่านตามเมล<br>
+      • กลุ่ม 2 (ประเมิน): 597104@egat.co.th | รหัสผ่านตามเมล<br>
+      • กลุ่ม 3 (แผนงาน): 594881@egat.co.th | รหัสผ่านตามเมล<br>
+      • กลุ่ม 4 (Admin): 597319@egat.co.th | รหัสผ่านตามเมล
+    </div>
+  </div>
+</div>
+
+<!-- APP WRAPPER (Shown when logged in) -->
+<div class="hidden" id="app-content-wrapper">
+  <div class="app-header">
+    <div class="header-logo"><div class="logo-icon">🏛️</div>DCM Building Assessment</div>
+    <div class="header-right">
+      <div class="user-info-badge">
+        👤 <span id="current-user-email">guest</span>
+        <span class="role-badge" id="current-user-role-lbl">ผู้เยือน</span>
+      </div>
+      <button class="hnav-btn" onclick="backToHome()">🏠 รายการโครงการ</button>
+      <button class="hnav-btn" id="nav-admin-btn" onclick="showAdminPanel()">⚙️ จัดการระบบ</button>
+      <button class="hnav-btn logout" onclick="handleLogout()">🚪 ออกจากระบบ</button>
+    </div>
+  </div>
+
+  <!-- HOME PAGE -->
+  <div class="page active" id="page-home">
+    <div class="home-main">
+      <div class="home-topbar">
+        <h1>โครงการประเมินทั้งหมด</h1>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn btn-outline" id="home-excel-btn" onclick="exportExcel()" style="font-size:0.88rem;">📊 ออกรายงาน Excel</button>
+          <button class="btn btn-primary" id="home-create-btn" onclick="createNewProject()">＋ สร้างใบประเมินใหม่</button>
+        </div>
+      </div>
+      
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-icon blue">📋</div>
+          <div><div class="stat-val" id="stat-total">0</div><div class="stat-label">โครงการทั้งหมด</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon yellow">⏳</div>
+          <div><div class="stat-val" id="stat-prog">0</div><div class="stat-label">กำลังดำเนินการ</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green">✅</div>
+          <div><div class="stat-val" id="stat-pass">0</div><div class="stat-label">ควรปรับปรุง</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon red">❌</div>
+          <div><div class="stat-val" id="stat-fail">0</div><div class="stat-label">ไม่ควรปรับปรุง</div></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon teal">
+            <svg viewBox="0 0 44 44" width="26" height="26" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="22" cy="22" r="20" fill="#c84b11" opacity="0.15"/>
+              <path d="M22 10 L22 22" stroke="#c84b11" stroke-width="3" stroke-linecap="round"/>
+              <path d="M14 14.5 A12 12 0 1 0 30 14.5" stroke="#c84b11" stroke-width="3" stroke-linecap="round" fill="none"/>
+            </svg>
+          </div>
+          <div><div class="stat-val" id="stat-closed">0</div><div class="stat-label">ดำเนินการแล้วเสร็จ</div></div>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <div class="search-wrap"><span class="search-icon">🔍</span><input type="text" id="search-input" placeholder="ค้นหาชื่ออาคาร/หน่วยงาน/สถานที่..." oninput="renderTable()"></div>
+        <select class="filter-select" id="filter-status" onchange="renderTable()">
+          <option value="">สถานะทั้งหมด</option>
+          <option value="draft">ลงทะเบียน</option>
+          <option value="in-progress">กำลังประเมิน</option>
+          <option value="done-pass">ควรปรับปรุง</option>
+          <option value="done-fail-all">ไม่ควรปรับปรุง</option>
+          <option value="is-closed">ดำเนินการแล้วเสร็จ</option>
+        </select>
+      </div>
+
+      <div class="table-card">
+        <table class="proj-table">
+          <thead>
+            <tr>
+              <th style="width:36px;">#</th>
+              <th>ชื่ออาคาร</th>
+              <th>หน่วยงาน</th>
+              <th>สถานที่</th>
+              <th>วันที่ประเมิน</th>
+              <th>สถานะ & สรุปผลการประเมิน</th>
+              <th style="text-align:center; width:140px;">เครื่องมือ</th>
+            </tr>
+          </thead>
+          <tbody id="proj-tbody"></tbody>
+        </table>
+        <div class="empty-state hidden" id="empty-state">
+          <div class="empty-icon">📋</div>
+          <div class="empty-label">ไม่พบข้อมูลโครงการในระบบ</div>
+          <div class="empty-sub">กดปุ่ม "สร้างใบประเมินใหม่" เพื่อเริ่มต้นการประเมิน</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMIN MANAGEMENT PANEL PAGE -->
+  <div class="page" id="page-admin">
+    <div class="home-main">
+      <div class="home-topbar">
+        <h1>⚙️ แผงควบคุมสิทธิ์และการจัดการระบบ</h1>
+        <button class="btn btn-outline" onclick="backToHome()">🏠 กลับหน้าหลัก</button>
+      </div>
+      
+      <div class="admin-card">
+        <div class="card-title"><div class="icon-box" style="background:var(--accent);">👤</div>เพิ่มผู้ใช้งานใหม่</div>
+        <div class="admin-form-row">
+          <div class="form-group">
+            <label>อีเมลผู้ใช้งาน</label>
+            <input type="email" id="adm-new-email" placeholder="egat-user@egat.co.th">
+          </div>
+          <div class="form-group">
+            <label>รหัสผ่าน</label>
+            <input type="text" id="adm-new-pwd" placeholder="ระบุรหัสผ่าน">
+          </div>
+          <div class="form-group">
+            <label>ระดับกลุ่ม / บทบาท</label>
+            <select id="adm-new-role">
+              <option value="1">1. ผู้ปฏิบัติงานทั่วไป</option>
+              <option value="2">2. ผู้ปฏิบัติงานในหน่วยงาน</option>
+              <option value="3">3. แผนกแผนงาน</option>
+              <option value="4">4. ผู้ดูแลระบบ Admin</option>
+            </select>
+          </div>
+          <div>
+            <button class="btn btn-success" onclick="adminAddUser()" style="width:100%; justify-content:center; padding:10px 14px;">➕ เพิ่ม</button>
+          </div>
+        </div>
+
+        <div class="section-divider"></div>
+        <div class="card-title"><div class="icon-box" style="background:var(--primary);">📋</div>รายชื่อผู้ใช้งานทั้งหมดในระบบ</div>
+        <div class="step2-scroll-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>อีเมลผู้ใช้งาน</th>
+                <th>รหัสผ่าน</th>
+                <th>ระดับสิทธิ์</th>
+                <th style="text-align:center; width:120px;">จัดการ</th>
+              </tr>
+            </thead>
+            <tbody id="admin-user-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ASSESSMENT PAGE -->
+  <div class="page" id="page-assess">
+    <div class="stepper-bar">
+      <div class="stepper">
+        <div class="step-item active" id="step-nav-1" onclick="goStep(1)"><div class="step-circle" id="step-circle-1">1</div><div class="step-label">ลงทะเบียน</div></div>
+        <div class="step-divider" id="div-1-2"></div>
+        <div class="step-item" id="step-nav-2" onclick="goStep(2)"><div class="step-circle" id="step-circle-2">2</div><div class="step-label">ประเมินเทคนิค</div></div>
+        <div class="step-divider" id="div-2-3"></div>
+        <div class="step-item" id="step-nav-3" onclick="goStep(3)"><div class="step-circle" id="step-circle-3">3</div><div class="step-label">สรุปผล & รายงาน</div></div>
+      </div>
+    </div>
+    
+    <div class="assess-main">
+      <!-- STEP 1: Registration -->
+      <div id="assess-step-1">
+        <div class="card">
+          <div class="card-title"><div class="icon-box">ℹ️</div>รายละเอียดโครงการ (Project Information)</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>1. ชื่ออาคาร <span class="req">*</span></label>
+              <input type="text" id="f-building" placeholder="ระบุชื่ออาคาร">
+            </div>
+            <div class="form-group">
+              <label>2. หน่วยงาน <span class="req">*</span></label>
+              <input type="text" id="f-department" placeholder="ระบุชื่อฝ่าย / สายรอง">
+            </div>
+            <div class="form-group">
+              <label>3. สถานที่ <span class="req">*</span></label>
+              <input type="text" id="f-location" placeholder="ระบุตำแหน่งที่ตั้ง">
+            </div>
+            <div class="form-group">
+              <label>4. ประเภทอาคาร</label>
+              <input type="text" id="f-type" placeholder="เช่น สำนักงาน บ้านพัก คลังพัสดุ">
+            </div>
+            <div class="form-group">
+              <label>5. ต้นทุนก่อสร้าง (บาท)</label>
+              <input type="text" id="f-cost" placeholder="0.00" oninput="fmtNum(this)" inputmode="decimal">
+            </div>
+            <div class="form-group">
+              <label>6. มูลค่าทรัพย์ทางบัญชีสินคงเหลือ (บาท)</label>
+              <input type="text" id="f-bookval" placeholder="0.00" oninput="fmtNum(this)" inputmode="decimal">
+            </div>
+            <div class="form-group">
+              <label>7. พื้นที่ใช้สอย (ตร.ม.)</label>
+              <input type="text" id="f-area" placeholder="0.00" oninput="fmtNum(this)" inputmode="decimal">
+            </div>
+            <div class="form-group">
+              <label>8. ปีที่ก่อสร้าง (พ.ศ.)</label>
+              <input type="text" id="f-year" placeholder="เช่น 2540" maxlength="4" inputmode="numeric">
+            </div>
+            <div class="form-group">
+              <label>9. อายุการใช้งานอาคาร (ปี)</label>
+              <input type="text" id="f-age" placeholder="จำนวนปี" inputmode="numeric">
+            </div>
+            <div class="form-group">
+              <label>10. Job No. <span style="font-size:0.78rem; color:var(--text-muted); font-weight:400;">(ไม่เกิน 7 ตัวเลข)</span></label>
+              <input type="text" id="f-jobno" placeholder="เลข Job No." maxlength="7" inputmode="numeric" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+            </div>
+            <div class="form-group span2">
+              <label>11. ชื่อผู้ประสานงาน</label>
+              <input type="text" id="f-coordinator" placeholder="ระบุชื่อ-นามสกุล ตำแหน่ง เบอร์โทร">
+            </div>
+            <div class="form-group">
+              <label>12. วันที่สำรวจพื้นที่</label>
+              <input type="date" id="f-survey-date" onchange="validateAssessDate()">
+            </div>
+            <div class="form-group">
+              <label>13. วันที่ประเมิน <span style="font-size:0.78rem; color:var(--text-muted); font-weight:400;">(ต้องไม่น้อยกว่าวันที่สำรวจ)</span></label>
+              <input type="date" id="f-date" onchange="validateAssessDate()">
+              <span id="date-warn" style="display:none; color:var(--danger); font-size:0.8rem;">⚠️ วันที่ประเมินต้องไม่น้อยกว่าวันที่สำรวจพื้นที่</span>
+            </div>
+            <div class="form-group span2">
+              <label>14. ชื่อ / หน่วยงานผู้ประเมิน <button class="btn-add" id="add-evaluator-btn" onclick="addEvaluator()">➕ เพิ่มผู้ประเมิน</button></label>
+              <div id="evaluator-list"></div>
+            </div>
+          </div>
+          <div class="actions-bar">
+            <button class="btn btn-ghost" onclick="backToHome()">← กลับหน้าหลัก</button>
+            <button class="btn btn-outline" onclick="saveDraftStep1()">💾 บันทึกร่าง</button>
+            <button class="btn btn-primary" onclick="goToStep2()">บันทึกและไปต่อ →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2: Technical Assessment -->
+      <div id="assess-step-2" class="hidden">
+        <span class="back-link" onclick="goStep(1)">← กลับขั้นตอนที่ 1</span>
+        <div class="step2-scroll-wrap">
+          <table class="assess-table">
+            <thead>
+              <tr>
+                <th style="width:32px;">ลำดับ</th>
+                <th style="text-align:left;">รายละเอียดหัวข้อการประเมิน</th>
+                <th style="width:70px;">น้ำหนัก</th>
+                <th style="width:110px;">ระดับ</th>
+                <th style="width:80px;">คะแนน</th>
+                <th style="width:90px;">ไฟล์/ลิงก์</th>
+              </tr>
+            </thead>
+            <tbody id="assess-tbody"></tbody>
+            <tfoot>
+              <tr class="grand-total-row">
+                <td colspan="2" style="text-align:right; padding-right:18px;">สรุปผลการประเมินด้านเทคนิค (GRAND TOTAL)</td>
+                <td style="text-align:center;">100</td>
+                <td></td>
+                <td style="text-align:center;" id="grand-total-display">0.00</td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <div class="actions-bar spread">
+          <button class="btn btn-ghost" onclick="goStep(1)">← กลับขั้นตอนที่ 1</button>
+          <div style="display:flex; gap:10px;">
+            <button class="btn btn-outline" onclick="saveDraft()">💾 บันทึกร่าง</button>
+            <button class="btn btn-success" onclick="confirmScores()">✅ ยืนยันผลคะแนน →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3: Report & Finish -->
+      <div id="assess-step-3" class="hidden">
+        <span class="back-link no-print" onclick="goStep(2)">← กลับขั้นตอนที่ 2</span>
+
+        <div class="report-header-box">
+          <div class="report-header-top">
+            <div class="report-logo-icon">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="48" height="48" rx="8" fill="#1a56db"/>
+                <rect x="8" y="28" width="6" height="14" rx="1" fill="white" opacity="0.9"/>
+                <rect x="16" y="22" width="6" height="20" rx="1" fill="white" opacity="0.9"/>
+                <rect x="24" y="16" width="6" height="26" rx="1" fill="white" opacity="0.9"/>
+                <rect x="32" y="10" width="6" height="32" rx="1" fill="white" opacity="0.9"/>
+                <polyline points="6,30 11,24 19,20 27,14 35,8" stroke="#f5c518" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              </svg>
+            </div>
+            <div>
+              <div class="report-org-name">ฝ่ายออกแบบและบริหารงานก่อสร้าง</div>
+              <div class="report-org-sub">Design and Construction Management Division</div>
+            </div>
+          </div>
+          <div class="report-divider"></div>
+          <div class="report-title-bar">ระบบประเมินสภาพอาคาร &nbsp; DCM Building Assessment</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><div class="icon-box">🏢</div>ข้อมูลโครงการ</div>
+          <div id="project-info-summary" class="report-info-grid"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><div class="icon-box">📊</div>1. การประเมินด้านเทคนิค</div>
+          <table class="breakdown-table">
+            <thead>
+              <tr>
+                <th style="width:48px;">ลำดับ</th>
+                <th>หมวด</th>
+                <th>รายละเอียด / คำอธิบาย</th>
+                <th class="score-cell" style="width:90px;">คะแนนที่ได้</th>
+                <th class="max-cell" style="width:80px;">คะแนนเต็ม</th>
+                <th style="width:130px;">สัดส่วน</th>
+              </tr>
+            </thead>
+            <tbody id="breakdown-tbody"></tbody>
+            <tfoot>
+              <tr style="border-top:2px solid var(--primary);">
+                <td colspan="3" style="font-weight:700; padding:10px 14px;">รวมคะแนนทั้งหมด</td>
+                <td class="score-cell" id="bd-total">0.00</td>
+                <td class="max-cell">100</td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <div class="card" id="criteria-section">
+          <div class="card-title"><div class="icon-box">📋</div>เกณฑ์เบื้องต้น</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+            <div>
+              <div style="font-weight:600; margin-bottom:10px; font-size:0.95rem;">2. ความคุ้มค่าในการปรับปรุงอาคาร ราคาปรับปรุงไม่เกิน 70% ของราคาก่อสร้างใหม่</div>
+              <div class="radio-group" id="c2-radio-grp">
+                <label><input type="radio" name="criteria2" value="yes" checked onchange="updateVerdict()"> YES</label>
+                <label><input type="radio" name="criteria2" value="no" onchange="updateVerdict()"> NO</label>
+              </div>
+            </div>
+            <div>
+              <div style="font-weight:600; margin-bottom:10px; font-size:0.95rem;">3. รับรองโครงสร้างอาคารโดยอ้างอิงรายงานตรวจสอบจาก อบย.</div>
+              <div class="radio-group" id="c3-radio-grp">
+                <label><input type="radio" name="criteria3" value="yes" checked onchange="updateVerdict()"> YES</label>
+                <label><input type="radio" name="criteria3" value="no" onchange="updateVerdict()"> NO</label>
+              </div>
+            </div>
+          </div>
+          
+          <hr class="section-divider">
+          
+          <div style="display:flex; align-items:flex-start; gap:20px; flex-wrap:wrap;">
+            <div style="flex:1; min-width:240px; background:var(--primary-light); border-radius:10px; padding:16px 20px;">
+              <div style="font-weight:700; font-size:0.95rem; color:var(--primary); margin-bottom:8px;">🔵 สรุปผลการประเมิน</div>
+              <div style="font-size:0.88rem; color:var(--text-muted); margin-bottom:6px;">คะแนนรวมสุทธิ:</div>
+              <div style="font-size:2rem; font-weight:800; color:var(--primary);" id="final-score-display">0.00</div>
+              <div style="margin-top:10px;" id="verdict-display"></div>
+            </div>
+            <div style="flex:1; min-width:240px; background:#fffbeb; border-radius:10px; padding:16px 20px; border:1px solid #fde68a;">
+              <div style="font-weight:700; font-size:0.88rem; color:var(--warning); margin-bottom:8px;">เกณฑ์การตัดสินใจ</div>
+              <div style="font-size:0.84rem; line-height:1.8;">
+                ✅ คะแนน <b>≥ 50</b> : ควรปรับปรุง (คุ้มค่า)<br>
+                ❌ คะแนน <b>&lt; 50</b> : ไม่ควรปรับปรุง (ไม่คุ้มค่า)<br>
+                <span style="color:var(--danger); font-size:0.8rem;">* หากข้อ 2 หรือ 3 เป็น NO ระบบสรุปว่า "ไม่ควรปรับปรุง (ไม่ผ่านเกณฑ์เบื้องต้น)" ทันที</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions-bar no-print">
+          <button class="btn btn-ghost" onclick="backToHome()">🏠 กลับหน้าหลัก</button>
+          <button class="btn btn-ghost" id="edit-scores-btn" onclick="goStep(2)">← แก้ไขคะแนน</button>
+          <button class="btn btn-outline" onclick="window.print()">🖨️ พิมพ์รายงาน</button>
+          <button class="btn btn-primary" id="save-finish-btn" onclick="saveAndFinish()">💾 บันทึกและเสร็จสิ้น</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ATTACHMENT PREVIEW MODAL -->
+<div class="att-modal-overlay" id="att-preview-modal">
+  <div class="att-modal">
+    <div class="att-modal-header">
+      <h3 id="att-modal-title">ไฟล์และลิงก์แนบ</h3>
+      <button class="att-close" onclick="closeAttModal()">✕</button>
+    </div>
+    <div class="att-modal-body" id="att-modal-body"></div>
+    <div class="att-modal-footer" id="att-modal-footer">
+      <label style="cursor:pointer;" class="btn btn-outline" style="font-size:0.88rem;">
+        📎 เพิ่มไฟล์ <input type="file" multiple style="display:none;" id="att-add-file-inp" onchange="modalAddFiles(this)">
+      </label>
+      <button class="btn btn-outline" onclick="modalAddLink()" style="font-size:0.88rem;">🔗 เพิ่มลิงก์</button>
+      <button class="btn btn-ghost" onclick="closeAttModal()" style="margin-left:auto; font-size:0.88rem;">ปิด</button>
+    </div>
+  </div>
+</div>
+
+<!-- LINK INPUT MODAL -->
+<div class="att-modal-overlay" id="link-input-modal">
+  <div class="link-modal">
+    <h3>🔗 เพิ่มลิงก์อ้างอิง</h3>
+    <input type="url" id="link-input-field" placeholder="https://example.com" oninput="this.style.borderColor=''">
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeLinkModal()">ยกเลิก</button>
+      <button class="btn btn-primary" onclick="confirmAddLink()">เพิ่มลิงก์</button>
+    </div>
+  </div>
+</div>
+
+<!-- DELETE MODAL -->
+<div class="modal-overlay" id="delete-modal">
+  <div class="modal">
+    <div class="modal-title">🗑️ ยืนยันการลบโครงการ</div>
+    <div class="modal-body" id="delete-modal-body">คุณต้องการลบโครงการนี้ใช่หรือไม่?</div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeDeleteModal()">ยกเลิก</button>
+      <button class="btn btn-danger" onclick="confirmDelete()">ลบโครงการ</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// CATEGORIES DATA DEF
+const CATEGORIES = [
+  {
+    id: 1, 
+    label: "1", 
+    name: "สภาพความสมบูรณ์ของอาคาร", 
+    note: "ไม่พบความเสียหาย = 3 | เสียหายเล็กน้อย = 2 | เสียหายรุนแรง = 1", 
+    weight: 25, 
+    items: [
+      { id: "1a", name: "งานโครงสร้าง", weight: 15 },
+      { id: "1b", name: "งานสถาปัตยกรรม และงานสถาปัตยกรรมภายใน", weight: 5 },
+      { id: "1c", name: "งานระบบไฟฟ้า", weight: 2 },
+      { id: "1d", name: "งานระบบสุขาภิบาล", weight: 1 },
+      { id: "1e", name: "งานระบบปรับอากาศ และระบบขนส่งอาคาร", weight: 2 }
+    ]
+  },
+  {
+    id: 2, 
+    label: "2", 
+    name: "อายุการใช้งานอาคาร", 
+    note: "< 10 ปี = 3 | 11-25 ปี = 2 | > 25 ปี = 1", 
+    weight: 10, 
+    items: []
+  },
+  {
+    id: 3, 
+    label: "3", 
+    name: "มาตรฐานและกฎหมายที่เกี่ยวข้อง", 
+    note: "เป็นไปตามกฎหมาย = 3 | บางส่วน = 2 | ไม่เป็นไปตามกฎหมาย = 1", 
+    weight: 25, 
+    items: [
+      { id: "3a", name: "งานโครงสร้าง", weight: 5 },
+      { id: "3b", name: "งานสถาปัตยกรรม และงานสถาปัตยกรรมภายใน", weight: 10 },
+      { id: "3c", name: "งานระบบไฟฟ้า", weight: 2.5 },
+      { id: "3d", name: "งานระบบสุขาภิบาล", weight: 2.5 },
+      { id: "3e", name: "งานระบบปรับอากาศ และระบบขนส่งอาคาร", weight: 5 }
+    ]
+  },
+  {
+    id: 4, 
+    label: "4", 
+    name: "ฟังก์ชันการใช้งานรองรับการปรับปรุง", 
+    note: "เหมาะสมมาก = 3 | ปานกลาง = 2 | ไม่เหมาะสม = 1", 
+    weight: 40, 
+    items: [
+      { id: "4a", name: "ความเหมาะสมของสถานที่อาคาร (Master Plan)", weight: 5 },
+      { id: "4b", name: "งานโครงสร้าง", weight: 7.5 },
+      { id: "4c", name: "งานสถาปัตยกรรม และงานสถาปัตยกรรมภายใน", weight: 12.5 },
+      { id: "4d", name: "งานระบบไฟฟ้า", weight: 5 },
+      { id: "4e", name: "งานระบบสุขาภิบาล", weight: 5 },
+      { id: "4f", name: "งานระบบปรับอากาศ และระบบขนส่งอาคาร", weight: 5 }
+    ]
+  }
+];
+
+// USER & SECURITY STATE MANAGEMENT
+const DEFAULT_USERS = [
+  // Group 1: General Users
+  { email: '593047@egat.co.th', password: '593047@egat.co.th', role: 1 },
+  { email: '593048@egat.co.th', password: '593048@egat.co.th', role: 1 },
+  // Group 2: Department Operators
+  { email: '597104@egat.co.th', password: '597104@egat.co.th', role: 2 },
+  { email: '597105@egat.co.th', password: '597105@egat.co.th', role: 2 },
+  // Group 3: Planners
+  { email: '594881@egat.co.th', password: '594881@egat.co.th', role: 3 },
+  { email: '594882@egat.co.th', password: '594882@egat.co.th', role: 3 },
+  // Group 4: Admins
+  { email: '597319@egat.co.th', password: '597319@egat.co.th', role: 4 },
+  { email: '597320@egat.co.th', password: '597320@egat.co.th', role: 4 }
+];
+
+let usersList = [];
+try {
+  usersList = JSON.parse(localStorage.getItem('dcm_users') || '[]');
+  if (!usersList.length) {
+    usersList = [...DEFAULT_USERS];
+    localStorage.setItem('dcm_users', JSON.stringify(usersList));
+  }
+} catch(e) {
+  usersList = [...DEFAULT_USERS];
+}
+
+let currentUser = null;
+
+// PROJECT DATA
+let projects = [];
+try {
+  projects = JSON.parse(localStorage.getItem('dcm_projects') || '[]');
+} catch(e) {
+  projects = [];
+}
+
+let currentProjectId = null;
+let deleteTargetId = null;
+let attachments = {};
+let currentAttId = null;
+const state = { scores: {} };
+
+// AUTHENTICATION CONTROLS
+function handleLogin() {
+  const email = document.getElementById('login-email').value.trim().toLowerCase();
+  const pass = document.getElementById('login-password').value;
+  
+  if (!email || !pass) {
+    showToast('กรุณากรอกข้อมูลอีเมลและรหัสผ่านให้ครบถ้วน', 'danger');
+    return;
+  }
+  
+  const user = usersList.find(u => u.email.toLowerCase() === email && u.password === pass);
+  
+  if (user) {
+    currentUser = user;
+    sessionStorage.setItem('dcm_current_user', JSON.stringify(user));
+    applyUserPrivileges();
+    showToast('เข้าสู่ระบบสำเร็จ ยินดีต้อนรับ ✓', 'success');
+    document.getElementById('login-view').classList.add('hidden');
+    document.getElementById('app-content-wrapper').classList.remove('hidden');
+    showPage('home');
+  } else {
+    showToast('ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง', 'danger');
+  }
+}
+
+function handleLogout() {
+  currentUser = null;
+  sessionStorage.removeItem('dcm_current_user');
+  document.getElementById('login-view').classList.remove('hidden');
+  document.getElementById('app-content-wrapper').classList.add('hidden');
+  document.getElementById('login-email').value = '';
+  document.getElementById('login-password').value = '';
+}
+
+function applyUserPrivileges() {
+  if (!currentUser) return;
+  
+  document.getElementById('current-user-email').textContent = currentUser.email;
+  const roles = {
+    1: 'ผู้ปฏิบัติงานทั่วไป (G1)',
+    2: 'ผู้ปฏิบัติงานในหน่วยงาน (G2)',
+    3: 'แผนกแผนงาน (G3)',
+    4: 'ผู้ดูแลระบบ Admin (G4)'
+  };
+  document.getElementById('current-user-role-lbl').textContent = roles[currentUser.role] || 'ทั่วไป';
+  
+  // NAV ADMIN BTN
+  const adminBtn = document.getElementById('nav-admin-btn');
+  if (currentUser.role === 4) {
+    adminBtn.classList.remove('hidden');
+  } else {
+    adminBtn.classList.add('hidden');
+  }
+  
+  // RENDER PERMISSION CONTROLLED BTNS
+  const createBtn = document.getElementById('home-create-btn');
+  const excelBtn = document.getElementById('home-excel-btn');
+  
+  // 1. general can't create
+  if (currentUser.role === 1) {
+    createBtn.classList.add('hidden');
+    excelBtn.classList.add('hidden');
+  } else {
+    createBtn.classList.remove('hidden');
+    excelBtn.classList.remove('hidden');
+  }
+  
+  renderTable();
+}
+
+// AUTO RESTORE SESSION ON LOAD
+window.onload = function() {
+  const savedUser = sessionStorage.getItem('dcm_current_user');
+  if (savedUser) {
+    currentUser = JSON.parse(savedUser);
+    applyUserPrivileges();
+    document.getElementById('login-view').classList.add('hidden');
+    document.getElementById('app-content-wrapper').classList.remove('hidden');
+    showPage('home');
+  }
+}
+
+// ADMIN PANEL CONTROLS
+function showAdminPanel() {
+  if (currentUser.role !== 4) {
+    showToast('คุณไม่มีสิทธิ์เข้าถึงฟังก์ชันนี้', 'danger');
+    return;
+  }
+  showPage('admin');
+  renderAdminUsers();
+}
+
+function renderAdminUsers() {
+  const tbody = document.getElementById('admin-user-tbody');
+  tbody.innerHTML = '';
+  
+  const roleNames = {
+    1: '1. ผู้ปฏิบัติงานทั่วไป',
+    2: '2. ผู้ปฏิบัติงานในหน่วยงาน',
+    3: '3. แผนกแผนงาน',
+    4: '4. ผู้ดูแลระบบ Admin'
+  };
+  
+  usersList.forEach((usr, idx) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="font-weight:600;">${usr.email}</td>
+      <td><code>${usr.password}</code></td>
+      <td><span class="role-badge" style="background:${usr.role===4?'var(--danger)':usr.role===3?'var(--success)':usr.role===2?'var(--primary)':'var(--text-muted)'}">${roleNames[usr.role]}</span></td>
+      <td style="text-align:center;">
+        <button class="abt del" onclick="adminDeleteUser('${usr.email}')" title="ลบผู้ใช้งาน" ${usr.email === currentUser.email ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}>🗑️</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// ADD USER VIA ADMIN
+function adminAddUser() {
+  const email = document.getElementById('adm-new-email').value.trim();
+  const pass = document.getElementById('adm-new-pwd').value.trim();
+  const role = parseInt(document.getElementById('adm-new-role').value);
+  
+  if (!email || !pass || !role) {
+    showToast('กรุณากรอกข้อมูลผู้ใช้ใหม่ให้ครบถ้วน', 'danger');
+    return;
+  }
+  
+  if (usersList.some(u => u.email.toLowerCase() === email.toLowerCase())) {
+    showToast('มีชื่อผู้ใช้งานนี้อยู่ในระบบแล้ว', 'danger');
+    return;
+  }
+  
+  usersList.push({ email, password: pass, role });
+  localStorage.setItem('dcm_users', JSON.stringify(usersList));
+  renderAdminUsers();
+  
+  // clear form
+  document.getElementById('adm-new-email').value = '';
+  document.getElementById('adm-new-pwd').value = '';
+  showToast('เพิ่มผู้ใช้งานใหม่เข้าสู่ระบบเรียบร้อย ✓', 'success');
+}
+
+function adminDeleteUser(email) {
+  if (email.toLowerCase() === currentUser.email.toLowerCase()) {
+    showToast('ไม่สามารถลบบัญชีที่กำลังใช้งานอยู่ได้', 'danger');
+    return;
+  }
+  
+  usersList = usersList.filter(u => u.email.toLowerCase() !== email.toLowerCase());
+  localStorage.setItem('dcm_users', JSON.stringify(usersList));
+  renderAdminUsers();
+  showToast('ลบข้อมูลผู้ใช้งานออกสำเร็จ', 'success');
+}
+
+// MAIN PAGE NAVIGATION
+function showPage(n) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + n).classList.add('active');
+  if (n === 'home') renderTable();
+}
+
+function backToHome() {
+  showPage('home');
+}
+
+function renderTable() {
+  if (!currentUser) return;
+  const q = (document.getElementById('search-input').value || '').toLowerCase();
+  const sf = document.getElementById('filter-status').value;
+  const isFailAll = sf === 'done-fail-all';
+  const isClosed = sf === 'is-closed';
+  const failStatuses = new Set(['done-fail', 'done-fail-score', 'done-fail-criteria']);
+  
+  let list = projects.filter(p => {
+    const mq = !q ||
+      (p.building || '').toLowerCase().includes(q) ||
+      (p.department || '').toLowerCase().includes(q) ||
+      (p.location || '').toLowerCase().includes(q);
+    const ms = !sf ||
+      (isClosed ? p.isClosed : isFailAll ? failStatuses.has(p.status) : p.status === sf);
+    return mq && ms;
+  });
+
+  const tbody = document.getElementById('proj-tbody');
+  tbody.innerHTML = '';
+  const empty = document.getElementById('empty-state');
+  
+  if (list.length === 0) {
+    empty.classList.remove('hidden');
+  } else {
+    empty.classList.add('hidden');
+    list.forEach((p, i) => {
+      const tr = document.createElement('tr');
+      
+      // PERMISSION DECISION BASED ON ROLE
+      let canEdit = true;
+      let canDelete = true;
+      let canToggleClose = true;
+      
+      // G1 (ผู้ปฏิบัติงานทั่วไป): Can't edit, can't delete, can't close
+      if (currentUser.role === 1) {
+        canEdit = false;
+        canDelete = false;
+        canToggleClose = false;
+      }
+      
+      // G2 (ผู้ปฏิบัติงานในหน่วยงาน): Can edit, can delete only if owner, CANNOT CLOSE
+      if (currentUser.role === 2) {
+        const isOwner = p.createdBy === currentUser.email;
+        canDelete = isOwner;
+        canToggleClose = false; // Labeled with X button in role requirements
+      }
+      
+      // G3 (แผนกแผนงาน): Can do everything
+      // G4 (ผู้ดูแลระบบ Admin): Can do everything
+
+      // Action buttons:
+      const editBtnHtml = canEdit 
+        ? `<button class="abt" onclick="editProject('${p.id}')" title="แก้ไข">✏️</button>` 
+        : `<button class="abt" style="opacity:0.4; cursor:not-allowed;" title="ไม่มีสิทธิ์แก้ไข">✏️</button>`;
+        
+      const deleteBtnHtml = canDelete 
+        ? `<button class="abt del" onclick="promptDelete('${p.id}')" title="ลบ" style="color:var(--danger);">🗑️</button>` 
+        : `<button class="abt" style="opacity:0.4; cursor:not-allowed;" title="ไม่มีสิทธิ์ลบข้อมูล">🗑️</button>`;
+        
+      const toggleCloseBtnHtml = canToggleClose 
+        ? `<button class="abt" onclick="toggleClose('${p.id}')" title="${p.isClosed ? 'เปิดงานใหม่' : 'ปิดงาน'}"
+            style="${p.isClosed ? 'border-color:#c84b11; background:#fff0eb;' : ''}">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 3 L12 12" stroke="${p.isClosed ? '#c84b11' : '#6b7a90'}" stroke-width="2.2" stroke-linecap="round"/>
+              <path d="M7.5 5.5 A8 8 0 1 0 16.5 5.5" stroke="${p.isClosed ? '#c84b11' : '#6b7a90'}" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            </svg>
+          </button>` 
+        : `<button class="abt" style="opacity:0.4; cursor:not-allowed;" title="ไม่มีสิทธิ์ปิดงาน">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 3 L12 12" stroke="#cbd5e1" stroke-width="2.2" stroke-linecap="round"/>
+              <path d="M7.5 5.5 A8 8 0 1 0 16.5 5.5" stroke="#cbd5e1" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            </svg>
+          </button>`;
+
+      tr.innerHTML = `
+        <td style="color:var(--text-muted); font-size:0.82rem;">${i+1}</td>
+        <td><div class="building-name">${p.building || '-'}</div><div class="building-loc">${p.type || ''}</div></td>
+        <td style="font-size:0.88rem;">${p.department || '-'}</td>
+        <td style="font-size:0.85rem; color:var(--text-muted);">${p.location || '-'}</td>
+        <td style="font-size:0.85rem; color:var(--text-muted);">${p.date || '-'}</td>
+        <td>${statusBadge(p)}</td>
+        <td>
+          <div class="action-btns">
+            ${editBtnHtml}
+            <button class="abt" onclick="viewProject('${p.id}')" title="ดูรายงาน" style="width:34px; height:34px;">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                <rect x="8" y="10" width="32" height="36" rx="3" fill="#2a9d8f" opacity="0.15"/>
+                <rect x="8" y="10" width="32" height="36" rx="3" stroke="#2a9d8f" stroke-width="2.5"/>
+                <rect x="18" y="6" width="12" height="8" rx="2" fill="#2a9d8f"/>
+                <line x1="15" y1="21" x2="33" y2="21" stroke="#2a9d8f" stroke-width="2" stroke-linecap="round"/>
+                <line x1="15" y1="28" x2="33" y2="28" stroke="#2a9d8f" stroke-width="2" stroke-linecap="round"/>
+                <line x1="15" y1="35" x2="27" y2="35" stroke="#2a9d8f" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="36" cy="38" r="7" fill="#2a9d8f"/>
+                <polyline points="32,38 35,41 40,35" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              </svg>
+            </button>
+            ${deleteBtnHtml}
+            ${toggleCloseBtnHtml}
+          </div>
+        </td>`;
+      tbody.appendChild(tr);
+    });
+  }
+  
+  document.getElementById('stat-total').textContent = projects.length;
+  document.getElementById('stat-prog').textContent = projects.filter(p => p.status === 'in-progress' || p.status === 'draft').length;
+  document.getElementById('stat-pass').textContent = projects.filter(p => p.status === 'done-pass').length;
+  document.getElementById('stat-fail').textContent = projects.filter(p => failStatuses.has(p.status)).length;
+  document.getElementById('stat-closed').textContent = projects.filter(p => p.isClosed).length;
+}
+
+// STATUS BADGE WITH TWO LINES SUPPORT WHEN CLOSED
+function statusBadge(p) {
+  const m = {
+    'draft':             ['draft',       '📝 ลงทะเบียน'],
+    'in-progress':       ['in-progress', '⏳ กำลังประเมิน'],
+    'done-pass':         ['done-pass',   '✅ ควรปรับปรุง (คุ้มค่า)'],
+    'done-fail-score':   ['done-fail',   '❌ ไม่ควรปรับปรุง (ไม่คุ้มค่า)'],
+    'done-fail-criteria':['done-fail',   '❌ ไม่ควรปรับปรุง (ไม่ผ่านเกณฑ์เบื้องต้น)'],
+    'done-fail':         ['done-fail',   '❌ ไม่ควรปรับปรุง']
+  };
+
+  const [cls, lbl] = m[p.status] || ['draft', '📝 ลงทะเบียน'];
+
+  if (p.isClosed) {
+    return `
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <div><span class="status-badge ${cls}"><span class="status-dot"></span>${lbl}</span></div>
+        <div><span class="status-badge" style="background:#e0f7f4; color:#2a9d8f;"><span class="status-dot" style="background:#2a9d8f;"></span>🏁 ดำเนินการแล้วเสร็จ</span></div>
+      </div>`;
+  }
+
+  return `<span class="status-badge ${cls}"><span class="status-dot"></span>${lbl}</span>`;
+}
+
+function toggleClose(id) {
+  if (currentUser.role === 1 || currentUser.role === 2) {
+    showToast('บทบาทของคุณไม่มีสิทธิ์ปิดงาน', 'danger');
+    return;
+  }
+  const p = projects.find(x => x.id === id);
+  if (!p) return;
+  p.isClosed = !p.isClosed;
+  saveProjects();
+  renderTable();
+  showToast(p.isClosed ? 'ปิดงาน — ดำเนินการแล้วเสร็จ ✓' : 'เปิดงานใหม่เรียบร้อยแล้ว', 'info');
+}
+
+function saveProjects() {
+  try {
+    localStorage.setItem('dcm_projects', JSON.stringify(projects));
+  } catch(e) {
+    showToast('ไม่สามารถบันทึกข้อมูลได้ เนื่องจากหน่วยความจำเต็ม', 'danger');
+  }
+}
+
+function createNewProject() {
+  if (currentUser.role === 1) {
+    showToast('บทบาทของคุณไม่มีสิทธิ์สร้างโครงการใหม่', 'danger');
+    return;
+  }
+  currentProjectId = 'proj_' + Date.now();
+  state.scores = {};
+  attachments = {};
+  resetForm();
+  goStep(1);
+  showPage('assess');
+}
+
+function editProject(id) {
+  if (currentUser.role === 1) {
+    showToast('บทบาทของคุณไม่มีสิทธิ์แก้ไขโครงการ', 'danger');
+    return;
+  }
+  const p = projects.find(x => x.id === id);
+  if (!p) return;
+  currentProjectId = id;
+  state.scores = JSON.parse(JSON.stringify(p.scores || {}));
+  attachments = JSON.parse(JSON.stringify(p.attachments || {}));
+  loadForm(p);
+  buildAssessTable();
+  restoreRatings();
+  goStep(1);
+  showPage('assess');
+}
+
+function viewProject(id) {
+  const p = projects.find(x => x.id === id);
+  if (!p) return;
+  
+  currentProjectId = id;
+  state.scores = JSON.parse(JSON.stringify(p.scores || {}));
+  attachments = JSON.parse(JSON.stringify(p.attachments || {}));
+  loadForm(p);
+  buildAssessTable();
+  restoreRatings();
+  buildStep3();
+  goStep(3);
+  showPage('assess');
+}
+
+function evalRow(v) {
+  return `<div class="evaluator-row"><input type="text" placeholder="ระบุชื่อ-นามสกุล ตำแหน่งผู้ประเมิน" class="eval-input" value="${v||''}"><button class="btn-remove" onclick="removeEvaluator(this)">✕</button></div>`;
+}
+
+function resetForm() {
+  ['f-building', 'f-department', 'f-location', 'f-type', 'f-coordinator', 'f-year', 'f-age', 'f-jobno', 'f-cost', 'f-bookval', 'f-area'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  document.getElementById('f-date').value = '';
+  document.getElementById('f-survey-date').value = '';
+  document.getElementById('f-date').removeAttribute('min');
+  document.getElementById('date-warn').style.display = 'none';
+  document.getElementById('evaluator-list').innerHTML = evalRow('');
+  document.querySelectorAll('input[name="criteria2"]').forEach(r => r.checked = r.value === 'yes');
+  document.querySelectorAll('input[name="criteria3"]').forEach(r => r.checked = r.value === 'yes');
+}
+
+function loadForm(p) {
+  document.getElementById('f-building').value = p.building || '';
+  document.getElementById('f-department').value = p.department || '';
+  document.getElementById('f-location').value = p.location || '';
+  document.getElementById('f-type').value = p.type || '';
+  document.getElementById('f-cost').value = p.cost || '';
+  document.getElementById('f-bookval').value = p.bookval || '';
+  document.getElementById('f-area').value = p.area || '';
+  document.getElementById('f-year').value = p.year || '';
+  document.getElementById('f-age').value = p.age || '';
+  document.getElementById('f-jobno').value = p.jobno || '';
+  document.getElementById('f-coordinator').value = p.coordinator || '';
+  document.getElementById('f-survey-date').value = p.surveyDate || '';
+  document.getElementById('f-date').value = p.date || '';
+  const evs = p.evaluators && p.evaluators.length ? p.evaluators : [''];
+  document.getElementById('evaluator-list').innerHTML = evs.map(e => evalRow(e)).join('');
+  document.querySelectorAll('input[name="criteria2"]').forEach(r => r.checked = r.value === (p.c2 || 'yes'));
+  document.querySelectorAll('input[name="criteria3"]').forEach(r => r.checked = r.value === (p.c3 || 'yes'));
+}
+
+function getFormData() {
+  const rawNum = (id) => parseFloat((document.getElementById(id).value || '0').replace(/,/g, '')) || 0;
+  return {
+    building: document.getElementById('f-building').value.trim(),
+    department: document.getElementById('f-department').value.trim(),
+    location: document.getElementById('f-location').value.trim(),
+    type: document.getElementById('f-type').value.trim(),
+    cost: document.getElementById('f-cost').value,
+    costRaw: rawNum('f-cost'),
+    bookval: document.getElementById('f-bookval').value,
+    bookvalRaw: rawNum('f-bookval'),
+    area: document.getElementById('f-area').value,
+    areaRaw: rawNum('f-area'),
+    year: document.getElementById('f-year').value,
+    age: document.getElementById('f-age').value.trim(),
+    jobno: document.getElementById('f-jobno').value.trim(),
+    coordinator: document.getElementById('f-coordinator').value.trim(),
+    surveyDate: document.getElementById('f-survey-date').value,
+    date: document.getElementById('f-date').value,
+    evaluators: [...document.querySelectorAll('.eval-input')].map(i => i.value).filter(Boolean),
+    c2: document.querySelector('input[name="criteria2"]:checked')?.value || 'yes',
+    c3: document.querySelector('input[name="criteria3"]:checked')?.value || 'yes',
+    createdBy: currentUser ? currentUser.email : ''
+  };
+}
+
+function upsertProject(status, score) {
+  const fd = getFormData();
+  const idx = projects.findIndex(p => p.id === currentProjectId);
+  
+  // Keep original creator if editing
+  const originalCreator = idx >= 0 ? (projects[idx].createdBy || fd.createdBy) : fd.createdBy;
+  
+  const data = {
+    id: currentProjectId,
+    ...fd,
+    createdBy: originalCreator,
+    scores: JSON.parse(JSON.stringify(state.scores)),
+    attachments: JSON.parse(JSON.stringify(attachments)),
+    status,
+    score
+  };
+  if (idx >= 0) projects[idx] = data; else projects.push(data);
+  saveProjects();
+}
+
+function promptDelete(id) {
+  const p = projects.find(x => x.id === id);
+  if (!p) return;
+  
+  // G2 restrict: Only owner
+  if (currentUser.role === 2 && p.createdBy !== currentUser.email) {
+    showToast('คุณสามารถลบได้เฉพาะรายงานที่คุณสร้างขึ้นเองเท่านั้น', 'danger');
+    return;
+  }
+  if (currentUser.role === 1) {
+    showToast('บทบาทของคุณไม่มีสิทธิ์ลบข้อมูล', 'danger');
+    return;
+  }
+  
+  deleteTargetId = id;
+  document.getElementById('delete-modal-body').textContent = `คุณต้องการลบโครงการ "${p?.building || 'นี้'}" ใช่หรือไม่? การดำเนินการนี้ไม่สามารถย้อนกลับได้`;
+  document.getElementById('delete-modal').classList.add('open');
+}
+
+function closeDeleteModal() {
+  document.getElementById('delete-modal').classList.remove('open');
+  deleteTargetId = null;
+}
+
+function confirmDelete() {
+  projects = projects.filter(p => p.id !== deleteTargetId);
+  saveProjects();
+  closeDeleteModal();
+  renderTable();
+  showToast('ลบโครงการเรียบร้อยแล้ว', 'success');
+}
+
+document.getElementById('delete-modal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeDeleteModal();
+});
+
+function goStep(n) {
+  // G1 CANNOT ACCESS STEP 1 & 2 OF THE STEPS TO PREVENT ACCIDENTAL CHANGES
+  if (currentUser.role === 1 && n !== 3) {
+    showToast('ผู้ปฏิบัติงานทั่วไป สามารถดูรายงานขั้นตอนที่ 3 ได้เท่านั้น', 'info');
+    return;
+  }
+
+  [1, 2, 3].forEach(i => {
+    document.getElementById('assess-step-' + i).classList.toggle('hidden', i !== n);
+    const nav = document.getElementById('step-nav-' + i);
+    nav.className = 'step-item' + (i === n ? ' active' : i < n ? ' done' : '');
+    document.getElementById('step-circle-' + i).textContent = i < n ? '✓' : i;
+  });
+  ['1-2', '2-3'].forEach(pair => {
+    document.getElementById('div-' + pair).className = 'step-divider' + (n > parseInt(pair.split('-')[1]) ? ' done' : '');
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function addEvaluator() {
+  document.getElementById('evaluator-list').insertAdjacentHTML('beforeend', evalRow(''));
+}
+
+function removeEvaluator(btn) {
+  const rows = document.querySelectorAll('.evaluator-row');
+  if (rows.length > 1) {
+    btn.closest('.evaluator-row').remove();
+  } else {
+    showToast('ต้องมีผู้ประเมินอย่างน้อย 1 คน', 'info');
+  }
+}
+
+function goToStep2() {
+  const b = document.getElementById('f-building').value.trim();
+  const dept = document.getElementById('f-department').value.trim();
+  const loc = document.getElementById('f-location').value.trim();
+  if (!b || !dept || !loc) {
+    showToast('กรุณากรอกข้อมูลที่จำเป็น (ชื่ออาคาร, หน่วยงาน, สถานที่)', 'info');
+    return;
+  }
+  const sd = document.getElementById('f-survey-date').value;
+  const dt = document.getElementById('f-date').value;
+  if (sd && dt && dt < sd) {
+    showToast('วันที่ประเมินต้องไม่น้อยกว่าวันที่สำรวจพื้นที่', 'info');
+    return;
+  }
+  if (!attachments) attachments = {};
+  upsertProject('in-progress', getGrandTotal());
+  buildAssessTable();
+  restoreRatings();
+  goStep(2);
+}
+
+function buildAssessTable() {
+  const tbody = document.getElementById('assess-tbody');
+  tbody.innerHTML = '';
+  CATEGORIES.forEach(cat => {
+    const cr = document.createElement('tr');
+    cr.className = 'cat-row';
+    if (cat.items.length === 0) {
+      cr.innerHTML = `
+        <td style="text-align:center;">${cat.label}</td>
+        <td><b>${cat.name}</b><br><span style="font-size:0.8rem; color:var(--text-muted); font-weight:400;">${cat.note}</span></td>
+        <td style="text-align:center;">${cat.weight}</td>
+        <td>${rHTML('cat_' + cat.id)}</td>
+        <td class="score-display" id="score-cat_${cat.id}">0.00</td>
+        <td>${uHTML('cat_' + cat.id)}</td>`;
+    } else {
+      cr.innerHTML = `
+        <td style="text-align:center;">${cat.label}</td>
+        <td><b>${cat.name}</b><br><span style="font-size:0.8rem; color:var(--text-muted); font-weight:400;">${cat.note}</span></td>
+        <td style="text-align:center;">${cat.weight}</td>
+        <td style="text-align:center; color:var(--text-muted); font-size:0.8rem;">-</td>
+        <td class="score-display" id="cat-total-${cat.id}">0.00</td>
+        <td></td>`;
+    }
+    tbody.appendChild(cr);
+    
+    cat.items.forEach(item => {
+      const sr = document.createElement('tr');
+      sr.className = 'sub-row';
+      sr.innerHTML = `
+        <td style="text-align:center; color:var(--text-muted);">-</td>
+        <td>${item.name}</td>
+        <td style="text-align:center;">${item.weight}</td>
+        <td>${rHTML(item.id)}</td>
+        <td class="score-display" id="score-${item.id}">0.00</td>
+        <td>${uHTML(item.id)}</td>`;
+      tbody.appendChild(sr);
+    });
+  });
+  calcScores();
+}
+
+function rHTML(id) {
+  return `
+    <div class="rating-btns">
+      <button class="rbtn" data-id="${id}" data-val="1" onclick="setRating('${id}',1)">1</button>
+      <button class="rbtn" data-id="${id}" data-val="2" onclick="setRating('${id}',2)">2</button>
+      <button class="rbtn" data-id="${id}" data-val="3" onclick="setRating('${id}',3)">3</button>
+    </div>`;
+}
+
+function uHTML(id) {
+  const att = attachments[id];
+  const fc = att && att.files.length ? att.files.length : 0;
+  const lc = att && att.links.length ? att.links.length : 0;
+  const totalBytes = att ? att.files.reduce((s,f) => s + (f.sizeBytes || 0), 0) : 0;
+  const overLimit = totalBytes > 2 * 1024 * 1024;
+  
+  let html = `<div class="upload-btns" id="ubtn-${id}">`;
+  html += `<button class="ubtn" title="แนบเอกสาร" onclick="addFile('${id}')" style="${overLimit ? 'border-color:var(--danger); color:var(--danger);' : ''}">📄</button>`;
+  html += `<button class="ubtn" title="เพิ่มลิงก์" onclick="addLink('${id}')">🔗</button>`;
+  if (fc || lc) {
+    html += `<button onclick="openAttModal('${id}')" style="background:${overLimit ? '#fee2e2' : 'var(--primary-light)'}; border:1.5px solid ${overLimit ? 'var(--danger)' : 'var(--primary)'}; border-radius:6px; padding:2px 7px; font-size:0.72rem; font-weight:700; color:${overLimit ? 'var(--danger)' : 'var(--primary)'}; cursor:pointer; margin-left:2px;">`;
+    if (fc) html += `📄${fc} `;
+    if (lc) html += `🔗${lc}`;
+    if (overLimit) html += ` ⚠️`;
+    html += '</button>';
+  }
+  html += '</div>';
+  return html;
+}
+
+const MAX_ATT_BYTES = 2 * 1024 * 1024; // 2 MB Limit
+
+function addFile(id) {
+  currentAttId = id;
+  const inp = document.getElementById('att-add-file-inp');
+  inp.onchange = () => { handleFiles(id, inp.files); };
+  inp.click();
+}
+
+function addLink(id) {
+  currentAttId = id;
+  document.getElementById('link-input-field').value = '';
+  document.getElementById('link-input-modal').classList.add('open');
+  setTimeout(() => document.getElementById('link-input-field').focus(), 100);
+}
+
+function closeLinkModal() {
+  document.getElementById('link-input-modal').classList.remove('open');
+}
+
+function confirmAddLink() {
+  const val = document.getElementById('link-input-field').value.trim();
+  if (!val) {
+    document.getElementById('link-input-field').style.borderColor = 'var(--danger)';
+    return;
+  }
+  const id = currentAttId;
+  if (!attachments[id]) attachments[id] = { files: [], links: [] };
+  attachments[id].links.push(val);
+  showToast('เพิ่มลิงก์เรียบร้อย ✓', 'success');
+  closeLinkModal();
+  updateUIBtn(id);
+  if (document.getElementById('att-preview-modal').classList.contains('open')) openAttModal(id);
+}
+
+document.getElementById('link-input-modal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeLinkModal();
+});
+
+function handleFiles(id, fileList) {
+  if (!fileList || !fileList.length) return;
+  if (!attachments[id]) attachments[id] = { files: [], links: [] };
+  
+  const existingBytes = attachments[id].files.reduce((s,f) => s + (f.sizeBytes || 0), 0);
+  const newBytes = Array.from(fileList).reduce((s,f) => s + f.size, 0);
+  
+  if (existingBytes + newBytes > MAX_ATT_BYTES) {
+    const totalMB = ((existingBytes + newBytes) / 1024 / 1024).toFixed(2);
+    showToast(`⚠️ ขนาดไฟล์รวมเกิน 2 MB (${totalMB} MB) — กรุณาลดขนาดหรือจำนวนไฟล์`, 'danger');
+    return;
+  }
+  
+  let loaded = 0;
+  const total = fileList.length;
+  Array.from(fileList).forEach(file => {
+    const isImg = /^image\//.test(file.type);
+    if (isImg && file.size < 3 * 1024 * 1024) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        attachments[id].files.push({
+          name: file.name,
+          size: (file.size / 1024).toFixed(1) + ' KB',
+          sizeBytes: file.size,
+          type: file.type,
+          dataURL: e.target.result
+        });
+        loaded++;
+        if (loaded === total) {
+          updateUIBtn(id);
+          if (document.getElementById('att-preview-modal').classList.contains('open')) openAttModal(id);
+        }
+      };
+      reader.readAsDataURL(file);
+    } else {
+      attachments[id].files.push({
+        name: file.name,
+        size: (file.size / 1024).toFixed(1) + ' KB',
+        sizeBytes: file.size,
+        type: file.type,
+        dataURL: null
+      });
+      loaded++;
+      if (loaded === total) {
+        updateUIBtn(id);
+        if (document.getElementById('att-preview-modal').classList.contains('open')) openAttModal(id);
+      }
+    }
+  });
+  showToast(`เพิ่ม ${total} ไฟล์เรียบร้อย ✓`, 'success');
+}
+
+function updateUIBtn(id) {
+  const btn = document.getElementById('ubtn-' + id);
+  if (!btn) return;
+  const att = attachments[id];
+  const fc = att && att.files.length ? att.files.length : 0;
+  const lc = att && att.links.length ? att.links.length : 0;
+  const totalBytes = att ? att.files.reduce((s,f) => s + (f.sizeBytes || 0), 0) : 0;
+  const over = totalBytes > MAX_ATT_BYTES;
+  
+  let h = `<button class="ubtn" title="แนบเอกสาร" onclick="addFile('${id}')" style="${over ? 'border-color:var(--danger); color:var(--danger);' : ''}">📄</button>`;
+  h += `<button class="ubtn" title="เพิ่มลิงก์" onclick="addLink('${id}')">🔗</button>`;
+  if (fc || lc) {
+    h += `<button onclick="openAttModal('${id}')" style="background:${over ? '#fee2e2' : 'var(--primary-light)'}; border:1.5px solid ${over ? 'var(--danger)' : 'var(--primary)'}; border-radius:6px; padding:2px 7px; font-size:0.72rem; font-weight:700; color:${over ? 'var(--danger)' : 'var(--primary)'}; cursor:pointer; margin-left:2px;">`;
+    if (fc) h += `📄${fc} `;
+    if (lc) h += `🔗${lc}`;
+    if (over) h += ` ⚠️`;
+    h += '</button>';
+  }
+  btn.innerHTML = h;
+}
+
+function openAttModal(id) {
+  currentAttId = id;
+  const att = attachments[id] || { files: [], links: [] };
+  const totalBytes = att.files.reduce((s,f) => s + (f.sizeBytes || 0), 0);
+  const totalKB = (totalBytes / 1024).toFixed(1);
+  const over = totalBytes > MAX_ATT_BYTES;
+  
+  document.getElementById('att-modal-title').textContent = `ไฟล์และลิงก์แนบ (${att.files.length} ไฟล์, ${att.links.length} ลิงก์)`;
+  const body = document.getElementById('att-modal-body');
+  let html = '';
+  
+  const pct = Math.min((totalBytes / MAX_ATT_BYTES) * 100, 100).toFixed(0);
+  html += `
+    <div style="margin-bottom:12px; padding:10px 12px; border-radius:8px; background:${over ? '#fee2e2' : '#f8fafc'}; border:1px solid ${over ? 'var(--danger)' : 'var(--border)'};">
+      <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:0.82rem; font-weight:600; color:${over ? 'var(--danger)' : 'var(--text-muted)'};">
+        <span>${over ? '⚠️ ขนาดเกิน 2 MB' : '📦 ขนาดไฟล์รวม'}</span>
+        <span>${totalKB} KB / 2,048 KB</span>
+      </div>
+      <div style="background:#e2e8f0; border-radius:99px; height:6px; overflow:hidden;">
+        <div style="height:6px; border-radius:99px; background:${over ? 'var(--danger)' : 'var(--primary)'}; width:${pct}%; transition:width 0.3s;"></div>
+      </div>
+      ${over ? '<div style="font-size:0.78rem; color:var(--danger); margin-top:4px;">กรุณาลบไฟล์บางส่วนเพื่อให้ขนาดไฟล์รวมไม่เกิน 2 MB</div>' : ''}
+    </div>`;
+
+  if (att.files.length) {
+    html += `<div class="att-section-title">📎 ไฟล์แนบ (${att.files.length} รายการ)</div><div class="att-file-list">`;
+    att.files.forEach((f, i) => {
+      const isImg = f.type && f.type.startsWith('image/');
+      html += `<div class="att-file-item">`;
+      if (isImg && f.dataURL) {
+        html += `<img class="att-file-thumb" src="${f.dataURL}" onclick="previewImg('${f.dataURL}','${f.name}')" title="คลิกเพื่อดูตัวอย่าง">`;
+      } else {
+        const icon = getFileIcon(f.type, f.name);
+        html += `<div class="att-file-icon" title="${f.name}">${icon}</div>`;
+      }
+      html += `<div class="att-file-name" title="${f.name}">${f.name.length > 18 ? f.name.substring(0, 15) + '...' : f.name}<br><span style="color:var(--text-muted); font-size:0.68rem;">${f.size}</span></div>`;
+      // Check delete permission in attachment modal
+      if (currentUser.role !== 1) {
+        html += `<button class="att-file-del" onclick="delFile('${id}',${i})" title="ลบ">✕</button>`;
+      }
+      html += `</div>`;
+    });
+    html += '</div>';
+  }
+
+  if (att.links.length) {
+    html += `<div class="att-section-title" style="${att.files.length ? '' : 'margin-top:0'}">🔗 ลิงก์อ้างอิง (${att.links.length} รายการ)</div><div class="att-link-list">`;
+    att.links.forEach((l, i) => {
+      html += `<div class="att-link-row">`;
+      html += `<a href="${l}" target="_blank" rel="noopener">${l}</a>`;
+      if (currentUser.role !== 1) {
+        html += `<button class="att-link-del" onclick="delLink('${id}',${i})" title="ลบ">✕</button>`;
+      }
+      html += `</div>`;
+    });
+    html += '</div>';
+  }
+
+  if (!att.files.length && !att.links.length) {
+    html = `<div style="text-align:center; padding:32px; color:var(--text-muted);">ยังไม่มีไฟล์หรือลิงก์แนบ</div>`;
+  }
+  
+  body.innerHTML = html;
+  
+  // Hide addition buttons for G1 inside Modal
+  const modalFooter = document.getElementById('att-modal-footer');
+  if (currentUser.role === 1) {
+    modalFooter.style.display = 'none';
+  } else {
+    modalFooter.style.display = 'flex';
+  }
+  
+  document.getElementById('att-add-file-inp').onchange = (e) => { handleFiles(id, e.target.files); };
+  document.getElementById('att-preview-modal').classList.add('open');
+}
+
+function closeAttModal() {
+  document.getElementById('att-preview-modal').classList.remove('open');
+}
+
+document.getElementById('att-preview-modal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeAttModal();
+});
+
+function modalAddFiles(inp) {
+  handleFiles(currentAttId, inp.files);
+}
+
+function modalAddLink() {
+  document.getElementById('link-input-field').value = '';
+  document.getElementById('link-input-modal').classList.add('open');
+  setTimeout(() => document.getElementById('link-input-field').focus(), 100);
+}
+
+function delFile(id, idx) {
+  if (attachments[id]) attachments[id].files.splice(idx, 1);
+  updateUIBtn(id);
+  openAttModal(id);
+}
+
+function delLink(id, idx) {
+  if (attachments[id]) attachments[id].links.splice(idx, 1);
+  updateUIBtn(id);
+  openAttModal(id);
+}
+
+function getFileIcon(type, name) {
+  if (!type && name) {
+    const ext = name.split('.').pop().toLowerCase();
+    if (ext === 'pdf') return '📄';
+    if (['doc', 'docx'].includes(ext)) return '📝';
+    if (['xls', 'xlsx'].includes(ext)) return '📊';
+    if (['zip', 'rar'].includes(ext)) return '🗜️';
+  }
+  if (!type) return '📎';
+  if (type.startsWith('image/')) return '🖼️';
+  if (type.includes('pdf')) return '📄';
+  if (type.includes('word') || type.includes('document')) return '📝';
+  if (type.includes('sheet') || type.includes('excel')) return '📊';
+  if (type.includes('zip') || type.includes('compressed')) return '🗜️';
+  return '📎';
+}
+
+function previewImg(src, name) {
+  const ov = document.createElement('div');
+  ov.style.cssText = 'position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:9999; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:12px; cursor:pointer;';
+  ov.innerHTML = `<div style="color:#fff; font-size:0.9rem; opacity:0.8;">${name}</div><img src="${src}" style="max-width:90vw; max-height:80vh; border-radius:8px; box-shadow:0 8px 32px rgba(0,0,0,0.5);" /><div style="color:#fff; font-size:0.8rem; opacity:0.6;">คลิกที่ใดก็ได้เพื่อปิด</div>`;
+  ov.onclick = () => document.body.removeChild(ov);
+  document.body.appendChild(ov);
+}
+
+function setRating(id, val) {
+  if (currentUser.role === 1) {
+    showToast('คุณไม่มีสิทธิ์แก้ไขผลคะแนนประเมิน', 'danger');
+    return;
+  }
+  state.scores[id] = val;
+  document.querySelectorAll(`[data-id="${id}"]`).forEach(b => {
+    b.className = 'rbtn' + (parseInt(b.dataset.val) === val ? ' sel' + val : '');
+  });
+  calcScores();
+}
+
+function restoreRatings() {
+  Object.entries(state.scores).forEach(([id, val]) => {
+    document.querySelectorAll(`[data-id="${id}"]`).forEach(b => {
+      b.className = 'rbtn' + (parseInt(b.dataset.val) === val ? ' sel' + val : '');
+    });
+  });
+  calcScores();
+}
+
+function calcScores() {
+  CATEGORIES.forEach(cat => {
+    if (cat.items.length === 0) {
+      const r = state.scores['cat_' + cat.id] || 0;
+      const sc = r > 0 ? (r / 3) * cat.weight : 0;
+      const el = document.getElementById('score-cat_' + cat.id);
+      if (el) el.textContent = sc.toFixed(2);
+    } else {
+      let t = 0;
+      cat.items.forEach(item => {
+        const r = state.scores[item.id] || 0;
+        const sc = r > 0 ? (r / 3) * item.weight : 0;
+        const el = document.getElementById('score-' + item.id);
+        if (el) el.textContent = sc.toFixed(2);
+        t += sc;
+      });
+      const ct = document.getElementById('cat-total-' + cat.id);
+      if (ct) ct.textContent = t.toFixed(2);
+    }
+  });
+  const el = document.getElementById('grand-total-display');
+  if (el) el.textContent = getGrandTotal().toFixed(2);
+}
+
+function getGrandTotal() {
+  let t = 0;
+  CATEGORIES.forEach(cat => {
+    if (cat.items.length === 0) {
+      const r = state.scores['cat_' + cat.id] || 0;
+      t += r > 0 ? (r / 3) * cat.weight : 0;
+    } else {
+      cat.items.forEach(item => {
+        const r = state.scores[item.id] || 0;
+        t += r > 0 ? (r / 3) * item.weight : 0;
+      });
+    }
+  });
+  return t;
+}
+
+function verdictBadge(v) {
+  if (v.pass) return `<span class="badge badge-pass">ควรปรับปรุง (คุ้มค่า)</span>`;
+  if (v.failReason === 'criteria') return `<span class="badge badge-fail">ไม่ควรปรับปรุง (ไม่ผ่านเกณฑ์เบื้องต้น)</span>`;
+  return `<span class="badge badge-fail">ไม่ควรปรับปรุง (ไม่คุ้มค่า)</span>`;
+}
+
+function saveDraftStep1() {
+  if (currentUser.role === 1) {
+    showToast('บทบาทของคุณไม่มีสิทธิ์บันทึกโครงการ', 'danger');
+    return;
+  }
+  const b = document.getElementById('f-building').value.trim();
+  if (!b) {
+    showToast('กรุณากรอกชื่ออาคารก่อนบันทึกร่าง', 'info');
+    return;
+  }
+  if (!attachments) attachments = {};
+  upsertProject('draft', undefined);
+  showToast('บันทึกร่างเรียบร้อยแล้ว ✓', 'success');
+}
+
+function saveDraft() {
+  if (currentUser.role === 1) {
+    showToast('บทบาทของคุณไม่มีสิทธิ์บันทึกโครงการ', 'danger');
+    return;
+  }
+  const b = document.getElementById('f-building').value.trim();
+  if (!b) {
+    showToast('กรุณากรอกชื่ออาคารก่อนบันทึกร่าง', 'info');
+    return;
+  }
+  upsertProject('in-progress', getGrandTotal());
+  showToast('บันทึกร่างเรียบร้อยแล้ว ✓', 'success');
+}
+
+function confirmScores() {
+  if (currentUser.role === 1) {
+    showToast('คุณไม่มีสิทธิ์แก้ไขแบบประเมิน', 'danger');
+    return;
+  }
+  upsertProject('in-progress', getGrandTotal());
+  buildStep3();
+  goStep(3);
+}
+
+function getVerdict() {
+  const total = getGrandTotal();
+  const c2 = document.querySelector('input[name="criteria2"]:checked')?.value;
+  const c3 = document.querySelector('input[name="criteria3"]:checked')?.value;
+  const fp = c2 === 'yes' && c3 === 'yes';
+  const pass = fp && total >= 50;
+  const failReason = !fp ? 'criteria' : (total < 50 ? 'score' : null);
+  return { total, pass, forcePass: fp, failReason };
+}
+
+function buildStep3() {
+  const v = getVerdict();
+  document.getElementById('final-score-display').textContent = v.total.toFixed(2);
+  const badgeEl = document.getElementById('verdict-display');
+  if (badgeEl) badgeEl.innerHTML = verdictBadge(v);
+
+  const CAT_DESC = [
+    ['ความมั่นคงแข็งแรงของโครงสร้าง', 'ความสมบูรณ์ของงานสถาปัตยกรรม', 'ความสมบูรณ์ของงานระบบไฟฟ้า, สุขาภิบาล, ปรับอากาศ'],
+    ['อายุอาคาร < 15 ปี = 3 คะแนน', 'อายุอาคาร 15-40 ปี = 2 คะแนน', 'อายุอาคาร > 40 ปี = 1 คะแนน'],
+    ['เป็นไปตาม พ.ร.บ. ควบคุมอาคาร พ.ศ. 2522', 'กฎกระทรวง / ข้อบัญญัติท้องถิ่น', 'พ.ร.บ. ผังเมือง และกฎหมายอื่นๆ'],
+    ['ตอบโจทย์การใช้งานปัจจุบัน', 'รองรับเทคโนโลยี / การปรับเปลี่ยนในอนาคต']
+  ];
+
+  const tbody = document.getElementById('breakdown-tbody');
+  tbody.innerHTML = '';
+  CATEGORIES.forEach((cat, i) => {
+    let cs = 0;
+    if (cat.items.length === 0) {
+      const r = state.scores['cat_' + cat.id] || 0;
+      cs = r > 0 ? (r / 3) * cat.weight : 0;
+    } else {
+      cat.items.forEach(item => {
+        const r = state.scores[item.id] || 0;
+        cs += r > 0 ? (r / 3) * item.weight : 0;
+      });
+    }
+    const pct = Math.min((cs / cat.weight) * 100, 100).toFixed(0);
+    const descHTML = (CAT_DESC[i] || []).map(d => `<div style="display:flex; align-items:flex-start; gap:5px; margin-bottom:2px;"><span style="color:var(--primary); font-weight:700; flex-shrink:0;">•</span><span>${d}</span></div>`).join('');
+    
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="text-align:center; font-weight:700; color:var(--primary);">${i+1}</td>
+      <td style="font-weight:600;">${cat.name}</td>
+      <td style="font-size:0.83rem; color:var(--text-muted); line-height:1.6;">${descHTML}</td>
+      <td class="score-cell">${cs.toFixed(2)}</td>
+      <td class="max-cell">${cat.weight}</td>
+      <td>
+        <div class="score-bar-wrap" style="width:100%;"><div class="score-bar" style="width:${pct}%"></div></div>
+        <div style="font-size:0.75rem; color:var(--text-muted); margin-top:3px; text-align:right;">${pct}%</div>
+      </td>`;
+    tbody.appendChild(tr);
+  });
+  
+  document.getElementById('bd-total').textContent = v.total.toFixed(2);
+  
+  const fields = [
+    ['ชื่ออาคาร', 'f-building'], ['หน่วยงาน', 'f-department'],
+    ['สถานที่', 'f-location'], ['ประเภทอาคาร', 'f-type'],
+    ['ต้นทุนก่อสร้าง (บาท)', 'f-cost'], ['มูลค่าทรัพย์ทางบัญชีสินคงเหลือ (บาท)', 'f-bookval'],
+    ['พื้นที่ใช้สอย (ตร.ม.)', 'f-area'], ['ปีที่ก่อสร้าง (พ.ศ.)', 'f-year'],
+    ['อายุการใช้งานอาคาร (ปี)', 'f-age'], ['Job No.', 'f-jobno'],
+    ['ผู้ประสานงาน', 'f-coordinator'], ['วันที่สำรวจพื้นที่', 'f-survey-date'],
+    ['วันที่ประเมิน', 'f-date'], ['ผู้ประเมิน', '_evaluators'],
+    ['บัญชีผู้บันทึกโครงการ', '_creator']
+  ];
+  
+  const evalNames = [...document.querySelectorAll('.eval-input')].map(i => i.value).filter(Boolean).join(', ') || '-';
+  const targetProject = projects.find(p => p.id === currentProjectId);
+  const creatorMail = targetProject ? (targetProject.createdBy || '-') : currentUser.email;
+
+  document.getElementById('project-info-summary').innerHTML = fields.map(([lb, fid]) => {
+    let val = '';
+    if (fid === '_evaluators') val = evalNames;
+    else if (fid === '_creator') val = creatorMail;
+    else val = (document.getElementById(fid)?.value || '-');
+    return `<div class="report-info-cell"><div class="report-info-label">${lb}</div><div class="report-info-value">${val || '-'}</div></div>`;
+  }).join('');
+
+  // SENSITIVE INPUT CONTROLS IN STEP 3 FOR GENERAL WORKER
+  const criteria2Radios = document.querySelectorAll('input[name="criteria2"]');
+  const criteria3Radios = document.querySelectorAll('input[name="criteria3"]');
+  const saveFinishBtn = document.getElementById('save-finish-btn');
+  const editScoresBtn = document.getElementById('edit-scores-btn');
+  
+  if (currentUser.role === 1) {
+    // Disable inputs & Hide save button for general users
+    criteria2Radios.forEach(r => r.disabled = true);
+    criteria3Radios.forEach(r => r.disabled = true);
+    saveFinishBtn.classList.add('hidden');
+    editScoresBtn.classList.add('hidden');
+  } else {
+    criteria2Radios.forEach(r => r.disabled = false);
+    criteria3Radios.forEach(r => r.disabled = false);
+    saveFinishBtn.classList.remove('hidden');
+    editScoresBtn.classList.remove('hidden');
+  }
+}
+
+function updateVerdict() {
+  if (currentUser.role === 1) return;
+  const v = getVerdict();
+  document.getElementById('final-score-display').textContent = v.total.toFixed(2);
+  const vd = document.getElementById('verdict-display');
+  if (vd) vd.innerHTML = verdictBadge(v);
+}
+
+function saveAndFinish() {
+  if (currentUser.role === 1) {
+    showToast('บทบาทของคุณไม่มีสิทธิ์บันทึกโครงการ', 'danger');
+    return;
+  }
+  const v = getVerdict();
+  let status = 'done-pass';
+  if (!v.pass) {
+    status = v.failReason === 'criteria' ? 'done-fail-criteria' : 'done-fail-score';
+  }
+  upsertProject(status, v.total);
+  showToast('บันทึกผลการประเมินเรียบร้อยแล้ว ✓', 'success');
+  setTimeout(() => backToHome(), 1200);
+}
+
+function showToast(msg, type = '') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show ' + type;
+  setTimeout(() => t.className = 'toast', 3000);
+}
+
+// ======================= DATE VALIDATION =======================
+function validateAssessDate() {
+  const sd = document.getElementById('f-survey-date').value;
+  const dt = document.getElementById('f-date').value;
+  const warn = document.getElementById('date-warn');
+  const dtInput = document.getElementById('f-date');
+  if (sd && dt && dt < sd) {
+    warn.style.display = 'block';
+    dtInput.style.borderColor = 'var(--danger)';
+    dtInput.style.boxShadow = '0 0 0 3px #fee2e2';
+  } else {
+    warn.style.display = 'none';
+    dtInput.style.borderColor = '';
+    dtInput.style.boxShadow = '';
+  }
+  if (sd) dtInput.min = sd; else dtInput.removeAttribute('min');
+}
+
+// ======================= NUMBER FORMATTING =======================
+function fmtNum(inp) {
+  const raw = inp.value.replace(/,/g, '');
+  if (raw === '' || raw === '-') return;
+  const parts = raw.split('.');
+  const intPart = parseInt(parts[0].replace(/[^0-9]/g, '') || '0', 10);
+  parts[0] = intPart.toLocaleString('th-TH');
+  inp.value = parts.length > 1 ? parts[0] + '.' + parts[1] : parts[0];
+}
+
+// ======================= EXCEL / CSV EXPORT =======================
+function exportExcel() {
+  if (currentUser.role === 1) {
+    showToast('บทบาทของคุณไม่มีสิทธิ์ออกรายงาน Excel', 'danger');
+    return;
+  }
+  if (!projects.length) {
+    showToast('ไม่มีข้อมูลโครงการในระบบ', 'info');
+    return;
+  }
+  const statusLabel = {
+    'draft':               'ลงทะเบียน',
+    'in-progress':         'กำลังประเมิน',
+    'done-pass':           'ควรปรับปรุง (คุ้มค่า)',
+    'done-fail-score':     'ไม่ควรปรับปรุง (ไม่คุ้มค่า)',
+    'done-fail-criteria':  'ไม่ควรปรับปรุง (ไม่ผ่านเกณฑ์เบื้องต้น)',
+    'done-fail':           'ไม่ควรปรับปรุง',
+    'closed':              'ดำเนินการแล้วเสร็จ'
+  };
+  
+  const catScore = (p, catIdx) => {
+    const cat = CATEGORIES[catIdx];
+    let s = 0;
+    if (cat.items.length === 0) {
+      const r = (p.scores || {})['cat_' + cat.id] || 0;
+      s = r > 0 ? (r / 3) * cat.weight : 0;
+    } else {
+      cat.items.forEach(item => {
+        const r = (p.scores || {})[item.id] || 0;
+        s += r > 0 ? (r / 3) * item.weight : 0;
+      });
+    }
+    return s.toFixed(2);
+  };
+
+  const headers = [
+    'ลำดับ', 'ชื่ออาคาร', 'หน่วยงาน', 'สถานที่', 'ประเภทอาคาร', 
+    'ต้นทุนก่อสร้าง (บาท)', 'มูลค่าทรัพย์ทางบัญชีสินคงเหลือ (บาท)', 'พื้นที่ใช้สอย (ตร.ม.)', 
+    'ปีที่ก่อสร้าง (พ.ศ.)', 'อายุการใช้งาน (ปี)', 'Job No.', 'ผู้ประสานงาน', 
+    'วันที่สำรวจพื้นที่', 'วันที่ประเมิน', 'ผู้ประเมิน', 'สถานะ & สรุปผลการประเมิน', 
+    'ดำเนินการแล้วเสร็จ', 'คะแนนรวม', 'หมวด 1 สภาพความสมบูรณ์ (25)', 
+    'หมวด 2 อายุการใช้งาน (10)', 'หมวด 3 มาตรฐานและกฎหมาย (25)', 
+    'หมวด 4 ฟังก์ชันการใช้งาน (40)', 'ข้อ 2 ความคุ้มค่า', 'ข้อ 3 รับรองโครงสร้าง', 'ผู้บันทึกโครงการ'
+  ];
+
+  const esc = (v) => '"' + (String(v || '')).replace(/"/g, '""') + '"';
+  const raw = (v) => String(v || '').replace(/,/g, '');
+  
+  const rows = [headers.map(esc).join(',')];
+  projects.forEach((p, i) => {
+    rows.push([
+      i + 1,
+      esc(p.building),
+      esc(p.department),
+      esc(p.location),
+      esc(p.type),
+      raw(p.cost) || 0,
+      raw(p.bookval) || 0,
+      raw(p.area) || 0,
+      p.year || '',
+      p.age || '',
+      p.jobno || '',
+      esc(p.coordinator),
+      p.surveyDate || '',
+      p.date || '',
+      esc((p.evaluators || []).join(', ')),
+      esc(statusLabel[p.status] || p.status || ''),
+      p.isClosed ? 'ใช่' : '',
+      p.score != null ? Number(p.score).toFixed(2) : '',
+      catScore(p, 0),
+      catScore(p, 1),
+      catScore(p, 2),
+      catScore(p, 3),
+      p.c2 || 'yes',
+      p.c3 || 'yes',
+      esc(p.createdBy || '')
+    ].join(','));
+  });
+
+  const csv = '\uFEFF' + rows.join('\r\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'DCM_Assessment_' + new Date().toISOString().split('T')[0] + '.csv';
+  document.body.appendChild(a);
+  a.click();
+  
+  setTimeout(() => {
+    URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+  }, 600);
+  
+  showToast('ออกรายงาน Excel (.csv) เรียบร้อย ✓', 'success');
+}
+
+// Initial Call
+renderTable();
+</script>
+</body>
+</html>
